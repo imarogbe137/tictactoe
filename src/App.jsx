@@ -13,7 +13,7 @@ function App() {
   ]);
   const [currentMove, setCurrentMove] = useState(0);
   const gamingBoard = history[currentMove];
-  const winner = calculateWinner(gamingBoard.squares);
+  const { winner, winningSquares } = calculateWinner(gamingBoard.squares);
 
   console.log(gamingBoard.squares);
 
@@ -55,6 +55,10 @@ function App() {
 
   return (
     <div className="app">
+      <h1>
+        TIC <span className="text-green">TAC</span> TOE FOR{' '}
+        <span className="text-pink">BABY</span>
+      </h1>
       <h2>
         <div>
           <StatusMessage winner={winner} gamingBoard={gamingBoard} />
@@ -63,6 +67,7 @@ function App() {
       <Board
         squares={gamingBoard.squares}
         handleSquareClick={handleSquareClick}
+        winningSquares={winningSquares}
       />
       <button
         type="button"
@@ -71,7 +76,13 @@ function App() {
       >
         NEW GAME
       </button>
-      <h2>Current Game History</h2>
+      <h2
+        style={{
+          fontWeight: 'normal',
+        }}
+      >
+        Current Game History
+      </h2>
       <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
   );
